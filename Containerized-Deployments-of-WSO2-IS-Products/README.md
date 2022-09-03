@@ -1,4 +1,4 @@
-# Containerized Deployments of WSO2 Identity Server
+# **Containerized Deployments of WSO2 Products**
 
 ## **Best Practices and Guidelines**
 

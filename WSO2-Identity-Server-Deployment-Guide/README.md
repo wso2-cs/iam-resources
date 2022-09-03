@@ -155,7 +155,7 @@ End users should be authenticated from WSO2IS for login. Therefore authenticatio
 
 Following is the high level deployment diagram that depicts.
 
-![Deployment Diagram](https://github.com/ShehanDinuka/WSO2-Identity-Server-Deployment-Guide/blob/main/Resources/img/deployment.png)
+![Deployment Diagram](../Resources/img/deployment.png)
 
 WSO2IS instances have been deployed in LAN by connecting the user store and the databases which are also resided in LAN. HTTPS ports of the WSO2IS instances are exposed to the DMZ.
 
@@ -193,7 +193,7 @@ It&#39;s recommended to have at least two WSO2 identity servers in the productio
 1. **High Availability:** If one node becomes unavailable or is experiencing high traffic, another node will seamlessly handle the requests.
 2. **Load Balancing:** Multiple nodes can handle the traffic together so that cluster throughput is higher than the throughput of a single node.
 
-![HA Deployment Diagram](https://github.com/ShehanDinuka/WSO2-Identity-Server-Deployment-Guide/blob/main/Resources/img/HA.png)
+![HA Deployment Diagram](../Resources/img/HA.png)
 
 #### Clustering Patterns
 
@@ -335,7 +335,7 @@ Identity servers support most of the RDBMS systems available in the market such 
 
 One another key point of setting up the DB is correct separation of the **database schemas**. WSO2 identity server consists of multiple schemas based on its usage, Separation of the schema is highly recommended as this would give more benefits for the organization in term of arranging the data.For further details refer the [documentation](https://is.docs.wso2.com/en/latest/setup/setting-up-separate-databases-for-clustering/)
 
-![DB separation](https://github.com/ShehanDinuka/WSO2-Identity-Server-Deployment-Guide/blob/main/Resources/img/DBs.png)
+![DB separation](../Resources/img/DBs.png)
 
 ##
 
@@ -385,7 +385,7 @@ Refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guid
 
 Refer to the [document](https://github.com/wso2/kubernetes-is/blob/master/advanced/is-pattern-1/README.md) for more information about kubernetes deployment.
 
-For more information about kubernetes best practices, refer to the [documentation](https://github.com/ShehanDinuka/Containerized-Deployments-of-WSO2-IS-Products).
+For more information about kubernetes best practices, refer to the [documentation](../Containerized-Deployments-of-WSO2-IS-Products).
 
 Refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guide/#clustering-related-configurations:~:text=Click%20to%20see%20the%20instructions%20for%20Kubernetes%20membership%20scheme) for clustering schema.
 
