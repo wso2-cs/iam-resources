@@ -2,3 +2,4 @@
 
 - [WSO2 Identity Server Deployment and Maintenance Best Practices Guide](WSO2-Identity-Server-Deployment-Guide)
 - [Containerized Deployments of WSO2 Identity Server](Containerized-Deployments-of-WSO2-IS-Products)
+- [Tackling Performance Issues in the WSO2 Identity Server](Tackling-Performance-Issues-in-the-WSO2-Identity-Server)
