@@ -257,16 +257,9 @@ There are different deployment patterns (Single node,Multi node) for the identit
 
 ### Choosing the Userstore
 
-WSO2 Identity server shipped with default userstore as an embedded LDAP for the primary userstore. However it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded LDAP is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
+WSO2 Identity server shipped with default userstore as an embedded H2 DB for the primary userstore. However it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded H2 DB is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
 
-Disable embedded LDAP using below configuration,
-```
-[embedded_ldap]
- enable = false
-```
 WSO2 Identity server can be connected with any LDAP based user stores or JDBC based user stores (by default it supports WSO2 specific schema for JDBC based user stores). Please refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/ldap-vs-jdbc/) for more details for a better understanding.
-
-If you are doing a fresh development with a fresh user store, it is recommended to use the JDBC based user store which is shipped with WSO2IS server.
 
 In JDBC based stores, we use WSO2 specific schema, DDL can be found on the \&lt;wso2is\&gt;/dbscripts/\&lt;db\_name\&gt;.sql. Also it&#39;s possible to use or migrate the existing JDBC schemas from having a custom userstore.
 
@@ -598,7 +591,7 @@ Set SendStringParametersAsUnicode to &#39;false&#39; in order to overcome a limi
 Sample configuration
 ```
 [database.user]
-url = "jdbc:sqlserver://localhost:1433;databaseName=userdb;SendStringParametersAsUnicode=false"
+url = "jdbc:sqlserver://localhost:1433;databaseName=userdb"
 username = "root"
 password = "root"
 driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
@@ -804,9 +797,6 @@ JVM heap size (Xmx) depends on your load. Given below are the general settings b
 For instance, if you want to increase the JVM heap size to 4GB, open wso2server.bat or wso2server.sh located in &lt;IS\_HOME&gt;/bin/ and do the following changes.
 ```
 JVM_MEM_OPTS="-Xms4096m -Xmx4096m"
-if [ "$java_version" \< "1.8" ]; then
-    JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m"
-Fi
 ```
 ##
 
