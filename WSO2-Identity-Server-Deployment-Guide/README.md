@@ -251,13 +251,13 @@ Following are the minimum recommendations for a basic Identity server deployment
 - 4 GB RAM or more (4 GB Heap for IAM server Prefered) (Server Memory 8GB)
 - 10 GB Disk Space minimum or more
 
-\* The above recommendations can change based on the expected concurrency &amp; performance.
+The above recommendations can change based on the expected concurrency &amp; performance.
 
 There are different deployment patterns (Single node,Multi node) for the identity server deployment. Hence you need to first choose the correct pattern for your deployment based on the business requirements, such as TPS, Analytics, Number of users, Cost. refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guide/) for further details.
 
 ### Choosing the Userstore
 
-WSO2 Identity server shipped with default userstore as an embedded LDAP for the primary userstore. However it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded LDAP is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
+WSO2 Identity server shipped with default userstore as an embedded LDAP except in Identity Server(IS) 6.0.0(in IS 6.0.0 H2 DB is used) for the primary userstore. However, it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded LDAP is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
 
 Disable embedded LDAP using below configuration,
 ```
@@ -266,9 +266,9 @@ Disable embedded LDAP using below configuration,
 ```
 WSO2 Identity server can be connected with any LDAP based user stores or JDBC based user stores (by default it supports WSO2 specific schema for JDBC based user stores). Please refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/ldap-vs-jdbc/) for more details for a better understanding.
 
-If you are doing a fresh development with a fresh user store, it is recommended to use the JDBC based user store which is shipped with WSO2IS server.
+If you are doing a fresh development with a fresh user store, it is recommended to use the JDBC based user store schemas which is shipped with WSO2IS server.
 
-In JDBC based stores, we use WSO2 specific schema, DDL can be found on the \&lt;wso2is\&gt;/dbscripts/\&lt;db\_name\&gt;.sql. Also it&#39;s possible to use or migrate the existing JDBC schemas from having a custom userstore.
+In JDBC based stores, we use WSO2 specific schema, DDL can be found on the &lt;wso2is&gt;/dbscripts/&lt;db_name&gt;.sql. Also it&#39;s possible to use or migrate the existing JDBC schemas from having a custom userstore.
 
 There is no special details on setting up the JDBC user stores, you can refer to the database setting up &amp; configuration for it.
 
@@ -327,7 +327,7 @@ If it is not according to above benchmarks, proper capacity planning should be d
 
 WSO2 Identity Server shipped with a H2 database as the default database for easy setup. However this is **NOT-RECOMMENDED** for the Production usage. As these are file based storage and can be corrupt at any point of time due to the high load. Since data is the most valuable resource, customers should choose the proper RDBMS system for storing the actual deployment data.
 
-However the WSO2\_CARBON\_DB will keep to use the H2 database as it consist of metadata specific to the wso2 server and its safe to use the H2 database for the WSO2\_CARBON\_DB as it could recover the data by the server itself in case of the file corruption by simply removing the old file. Also there won&#39;t be heavy read/write operations for this datasource, hence its highly unlikely to get corrupted.
+However the WSO2_CARBON_DB will keep to use the H2 database as it consist of metadata specific to the wso2 server and its safe to use the H2 database for the WSO2_CARBON_DB as it could recover the data by the server itself in case of the file corruption by simply removing the old file. Also there won&#39;t be heavy read/write operations for this datasource, hence its highly unlikely to get corrupted.
 
 Identity servers support most of the RDBMS systems available in the market such as (ORACLE, SQL Server, MySQL, PostgreSQL, DB2) and Standard LDAP systems (openldap, Active directory). For more information refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/working-with-databases/#working-with-databases).
 
@@ -467,16 +467,16 @@ Below section is used to configure the application password from the authenticat
 [identity.auth_framework.endpoint]
 app_password= "$secret{app_password}"
 ```
-In the below we are configuring the SHA-256 hash of the newly added client app\_password for the above client app on the server side. Here also we have kept the default configurations.
+In the below we are configuring the SHA-256 hash of the newly added client app_password for the above client app on the server side. Here also we have kept the default configurations.
 ```
 [account_recovery.endpoint.auth]
 hash = "66cd9688a2ae068244ea01e70f0e230f5623b7fa4cdecb65070a09ec06452262"
 ```
 ### Keystores
 
-By default WSO2 Identity server comes with Single Keystore and a separate truststore (stored in the &lt;IS\_HOME&gt;/repository/resources/security/ directory). However in a production environment it&#39;s recommended to separate out the keystores for better usage. Refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/configuring-keystores-in-wso2-products/) for more information.
+By default WSO2 Identity server comes with Single Keystore and a separate truststore (stored in the &lt;IS_HOME&gt;/repository/resources/security/ directory). However in a production environment it&#39;s recommended to separate out the keystores for better usage. Refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/configuring-keystores-in-wso2-products/) for more information.
 
-**Primary Keystore** - Use the existing Primary Keystore for signing messages when WSO2 Identity Server communicates with external parties (such SAML, OIDC id\_token signing)
+**Primary Keystore** - Use the existing Primary Keystore for signing messages when WSO2 Identity Server communicates with external parties (such SAML, OIDC id_token signing)
 ```
 [keystore.primary]
 file_name = "primary.jks"
@@ -578,7 +578,7 @@ logAbandoned = false
 
 #### PostgreSQL
 
-**Increese**  **max\_wal\_size**
+**Increese**  **max_wal_size**
 
 Postgres checkpoint is set to 5 minutes and if the WAL generated during that time is greater than the default max wal size (1 GB) there will be frequent flush happen to the disk, which will decrease the performance of the database. This has to be verified with your DBA and configure the correct value based on the TPS expected. Further reading refers to the [documentation](https://www.postgresql.org/docs/9.6/wal-configuration.html).
 
@@ -608,7 +608,7 @@ driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 
 By default, the MSSQL Server uses shared locks to prevent other transactions from modifying rows while the current transaction is running a read operation. When this is the case, if multiple read statements are trying to execute for the same table, there might be a deadlock situation.
 
-Therefore, in order to overcome this, we have to change this default behavior from READ\_COMMITTED\_SNAPSHOT being off to READ\_COMMITTED\_SNAPSHOT being on for the databases.
+Therefore, in order to overcome this, we have to change this default behavior from READ_COMMITTED_SNAPSHOT being off to READ_COMMITTED_SNAPSHOT being on for the databases.
 ```
 ALTER DATABASE <DATABASE_NAME> SET ALLOW_SNAPSHOT_ISOLATION ON
 ALTER DATABASE <DATABASE_NAME> SET READ_COMMITTED_SNAPSHOT ON WITH ROLLBACK IMMEDIATE 
@@ -644,9 +644,9 @@ enable = false
 
 ### Userstore
 
-In WSO2 Identity server, username is considered as case insensitive, Hence all the username queries fired to the database will have a lower(UM\_USER\_NAME) function, However this is not required for some of the databases like MySQL is treat all the queries as case insensitive.
+In WSO2 Identity server, username is considered as case-insensitive, Hence all the username queries fired to the database will have a lower(UM_USER_NAME) function, However this is not required for some databases like MySQL is treat all the queries as case insensitive.
 
-Therefore it&#39;s recommended to set the case insensitive parameter to false for databases like MySQL and SQL Server. Otherwise the provided Indexes in the product dbscripts will not affect. Refer section [indexes](#indexes) for creating the correct indexes.
+Therefore it&#39;s recommended to set the case-insensitive parameter to false for databases like MySQL and SQL Server. Otherwise the provided Indexes in the product dbscripts will not affect. Refer section [indexes](#indexes) for creating the correct indexes.
 ```
 [user_store] 
 properties.CaseInsensitiveUsername = false
@@ -727,7 +727,7 @@ This section explains how plain text passwords in configuration files can be enc
 
 #### Encrypting passwords
 
-Open the server configuration file (deployment.toml file) in the &lt;IS\_HOME&gt;/repository/conf/ directory and add the &quot;[secrets]&quot; configuration section at the bottom of the file as shown below. Now we have to provide an alias for the password type followed by the actual password. Below I have listed several of them.
+Open the server configuration file (deployment.toml file) in the &lt;IS_HOME&gt;/repository/conf/ directory and add the &quot;[secrets]&quot; configuration section at the bottom of the file as shown below. Now we have to provide an alias for the password type followed by the actual password. Below I have listed several of them.
 ```
 [secrets]
 admin_password = "[password_1]"
@@ -737,7 +737,7 @@ key_password = "[password_4]"
 truststrore_password = "[password_5]"
 app_password = "[password_6]"
 ```
-Then navigate to the &lt;IS\_HOME&gt;/bin/ directory in a command prompt, and execute the following command to encrypt the passwords.
+Then navigate to the &lt;IS_HOME&gt;/bin/ directory in a command prompt, and execute the following command to encrypt the passwords.
 ```
 On Linux: ./ciphertool.sh -Dconfigure
 On Windows: ciphertool.bat -Dconfigure
@@ -787,7 +787,7 @@ It is recommended to configure the local DNS entries in the identity server inst
 
 #### Setting the thread execution limit for multi tenant mode.
 
-In multi-tenant mode, the Carbon runtime limits the thread execution time. That is, if a thread is stuck or taking a long time to process, Carbon detects such threads, interrupts and stops them. Note that Carbon prints the current stack trace before interrupting the thread. This mechanism is implemented as an Apache Tomcat valve. Therefore, it should be configured in the &lt;IS\_HOME&gt;/repository/conf/deployment.toml file as shown below.
+In multi-tenant mode, the Carbon runtime limits the thread execution time. That is, if a thread is stuck or taking a long time to process, Carbon detects such threads, interrupts and stops them. Note that Carbon prints the current stack trace before interrupting the thread. This mechanism is implemented as an Apache Tomcat valve. Therefore, it should be configured in the &lt;IS_HOME&gt;/repository/conf/deployment.toml file as shown below.
 ```
 [catalina.valves.valve.properties]
 className = "org.wso2.carbon.tomcat.ext.valves.CarbonStuckThreadDetectionValve"
@@ -801,12 +801,9 @@ The threshold gives the minimum duration in seconds after which a thread is cons
 
 JVM heap size (Xmx) depends on your load. Given below are the general settings but if you are in a production environment, this might not be sufficient . In such situations, you can increase the heap size accordingly .
 
-For instance, if you want to increase the JVM heap size to 4GB, open wso2server.bat or wso2server.sh located in &lt;IS\_HOME&gt;/bin/ and do the following changes.
+For instance, if you want to increase the JVM heap size to 4GB, open wso2server.bat or wso2server.sh located in &lt;IS_HOME&gt;/bin/ and do the following changes.
 ```
 JVM_MEM_OPTS="-Xms4096m -Xmx4096m"
-if [ "$java_version" \< "1.8" ]; then
-    JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m"
-Fi
 ```
 ##
 
@@ -841,7 +838,7 @@ However in the production environment, it&#39;s recommended to have INFO as the 
 
 ### Enable Logs for a Component
 
-Add a logger in the &lt;IS\_HOME&gt;/repository/conf/log4j2.properties file to define the logger. Then add the to the loggers list by comma-separate.
+Add a logger in the &lt;IS_HOME&gt;/repository/conf/log4j2.properties file to define the logger. Then add the to the loggers list by comma-separate.
 ```
 logger.<Logger_Name>.name = <Component_name>
 logger.<Logger_Name>.level = <Log_level>
@@ -961,7 +958,7 @@ Also one of the other important things is the database indexes. WSO2 shipped the
 
 However there are certain cases where these indexes get updated and should require a change based on the configurations. Hence its DBA responsibility to propagate the same to the database for the optimum performance.
 
-1. If the userstore is configured to use case insensitive usernames with the databases like Oracle, PostgreSQL, SQLServer DBA should create the respective indexes with lower(UM\_USER\_NAME) functionality. Refer section [userstore](#_38s8lnf3lt92) for more details.
+1. If the userstore is configured to use case insensitive usernames with the databases like Oracle, PostgreSQL, SQLServer DBA should create the respective indexes with lower(UM_USER_NAME) functionality. Refer section [userstore](#_38s8lnf3lt92) for more details.
 
 2. New indexes introduced with WUM updates will not reflect in the database, Hence its the maintenance team responsibility to create such indexes in the database with the help of DBA.
 
@@ -1002,7 +999,7 @@ A subscription is mandatory to get WSO2 updates. A Subscription can be obtained 
 
 Update tool is a CLI distribution that is separate for Linux, MacOS and Windows distributions. Bringing the product up to date with the Update Tool is very easy. It is as simple as running one of the commands that matches with your Operating System.
 
-The following commands should be performed in command prompt under the directory path of &lt;IS\_HOME&gt;/bin
+The following commands should be performed in command prompt under the directory path of &lt;IS_HOME&gt;/bin
 
 Update Commands for OS,
 ```
