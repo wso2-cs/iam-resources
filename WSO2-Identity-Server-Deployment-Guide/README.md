@@ -151,7 +151,7 @@ Usually WSO2IS (or any IAM product) should be deployed in the secured network (L
 
 Management console &amp; management API of the WSO2IS usually should not be exposed to outsiders. It should be only exposed in the LAN.
 
-End users should be authenticated from WSO2IS for login. Therefore authentication endpoints, user portals, and other web applications should be reachable by the end user.
+End users should be authenticated from WSO2IS for login. Therefore, authentication endpoints, user portals, and other web applications should be reachable by the end user.
 
 Following is the high level deployment diagram that depicts.
 
@@ -165,11 +165,11 @@ There is a firewall between LAN and DMZ. This firewall limits the access to the 
 
 Further, a firewall can be used to block the management console by limiting the access to the web context &quot;/carbon&quot;. But this can be achieved through proxy servers as well.
 
-Proxy/LB is the only entity which can access the WSO2IS instances in the LAN and it is the entry point. It contains load balancing logic and reverse proxy logic.
+Proxy/LB is the only entity which can access the WSO2IS instances in the LAN, and it is the entry point. It contains load balancing logic and reverse proxy logic.
 
 Authentication endpoints should be reachable for end users. There should be a reverse proxy configuration in the Proxy/LB.
 
-Proxy/LB server should accept external requests for port 443 and it should deny the requests which are coming other than above defined reverse proxy endpoints.
+Proxy/LB server should accept external requests for port 443, and it should deny the requests which are coming other than above defined reverse proxy endpoints.
 
 There is a firewall between DMZ and the external network. This firewall can allow only port 443 for external clients.
 
@@ -199,7 +199,7 @@ It&#39;s recommended to have at least two WSO2 identity servers in the productio
 
 1. Active-Active - All the nodes are in active mode and serving requests
 
-1. Active-Passive - Some of the nodes are in passive mode(not serving requests) and once active node is down, passive node becomes active and serve requests
+1. Active-Passive - Some nodes are in passive mode(not serving requests) and once active node is down, passive node becomes active and serve requests
 
 #### Multi regional deployment
 
@@ -248,16 +248,16 @@ It&#39;s highly recommended to have a minimum of three environments (Prod,Pre Pr
 Following are the minimum recommendations for a basic Identity server deployment. Refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/deployment-guide/) for more information.
 
 - 4 vCPUs or more
-- 4 GB RAM or more (4 GB Heap for IAM server Prefered) (Server Memory 8GB)
+- 4 GB RAM or more (4 GB Heap for IAM server Preferred) (Server Memory 8GB)
 - 10 GB Disk Space minimum or more
 
-\* The above recommendations can change based on the expected concurrency &amp; performance.
+The above recommendations can change based on the expected concurrency &amp; performance.
 
-There are different deployment patterns (Single node,Multi node) for the identity server deployment. Hence you need to first choose the correct pattern for your deployment based on the business requirements, such as TPS, Analytics, Number of users, Cost. refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guide/) for further details.
+There are different deployment patterns (Single node,Multi node) for the identity server deployment. Hence, you need to first choose the correct pattern for your deployment based on the business requirements, such as TPS, Analytics, Number of users, Cost. refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guide/) for further details.
 
 ### Choosing the Userstore
 
-WSO2 Identity server shipped with default userstore as an embedded LDAP for the primary userstore. However it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded LDAP is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
+WSO2 Identity server shipped with default userstore as an embedded LDAP except in Identity Server(IS) 6.0.0(in IS 6.0.0 H2 DB is used) for the primary userstore. However, it is **NOT-RECOMMENDED** to use for the Production &amp; it is recommended only for development tasks in a developer&#39;s machine. As embedded LDAP is running inside the WSO2 identity server instance, it can&#39;t be scaled &amp; it has been seen that storage could be corrupt at any point of time; especially with the load. Since data is the most valuable resource, customers should choose the proper userstore option for the production.
 
 Disable embedded LDAP using below configuration,
 ```
@@ -266,9 +266,9 @@ Disable embedded LDAP using below configuration,
 ```
 WSO2 Identity server can be connected with any LDAP based user stores or JDBC based user stores (by default it supports WSO2 specific schema for JDBC based user stores). Please refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/ldap-vs-jdbc/) for more details for a better understanding.
 
-If you are doing a fresh development with a fresh user store, it is recommended to use the JDBC based user store which is shipped with WSO2IS server.
+If you are doing a fresh development with a fresh user store, it is recommended to use the JDBC based user store schemas which is shipped with WSO2IS server.
 
-In JDBC based stores, we use WSO2 specific schema, DDL can be found on the \&lt;wso2is\&gt;/dbscripts/\&lt;db\_name\&gt;.sql. Also it&#39;s possible to use or migrate the existing JDBC schemas from having a custom userstore.
+In JDBC based stores, we use WSO2 specific schema, DDL can be found on the &lt;wso2is&gt;/dbscripts/&lt;db_name&gt;.sql. Also it&#39;s possible to use or migrate the existing JDBC schemas from having a custom userstore.
 
 There is no special details on setting up the JDBC user stores, you can refer to the database setting up &amp; configuration for it.
 
@@ -291,24 +291,24 @@ Connection pooling does not apply to LDAPS connections (SSL-enabled LDAP connect
 1. Stop the server.
 2. Navigate to the &lt;PRODUCT_HOME&gt;/bin directory, and open the relevant startup script:
 
-	``` 
-	On Linux: wso2server.sh 
-	On Windows: wso2server.bat
-	```
+    ``` 
+    On Linux: wso2server.sh 
+    On Windows: wso2server.bat
+    ```
 
-1. Add the following system property to the script:
+3. Add the following system property to the script:
 
-	```
-	-Dcom.sun.jndi.ldap.connect.pool.protocol=”plain ssl”
-	```
+    ```
+    -Dcom.sun.jndi.ldap.connect.pool.protocol=”plain ssl”
+    ```
 
-1. Start the server.
+4. Start the server.
 
 ### Setting up the Database
 
 **Database Sizing**
 
-Most of our customers found it is difficult to project the sizing for their database. Here is some formula for the initial calculation. However please note that this will be a rough value for calculating estimation of the database size, the actual values may differ depending on use cases and the database types used.
+Most of our customers found it is difficult to project the sizing for their database. Here is some formula for the initial calculation. However, please note that this will be a rough value for calculating estimation of the database size, the actual values may differ depending on use cases and the database types used.
 
 Assumption is 1 - 3 KB per a transaction, and if the projected **TPS** is **50** for the deployment. Here is the formula for calculating the rough size of the database required for a DAY use.
 
@@ -325,11 +325,11 @@ If it is not according to above benchmarks, proper capacity planning should be d
 
 **Use of Default Databases**
 
-WSO2 Identity Server shipped with a H2 database as the default database for easy setup. However this is **NOT-RECOMMENDED** for the Production usage. As these are file based storage and can be corrupt at any point of time due to the high load. Since data is the most valuable resource, customers should choose the proper RDBMS system for storing the actual deployment data.
+WSO2 Identity Server shipped with a H2 database as the default database for easy setup. However, this is **NOT-RECOMMENDED** for the Production usage. As these are file based storage and can be corrupt at any point of time due to the high load. Since data is the most valuable resource, customers should choose the proper RDBMS system for storing the actual deployment data.
 
-However the WSO2\_CARBON\_DB will keep to use the H2 database as it consist of metadata specific to the wso2 server and its safe to use the H2 database for the WSO2\_CARBON\_DB as it could recover the data by the server itself in case of the file corruption by simply removing the old file. Also there won&#39;t be heavy read/write operations for this datasource, hence its highly unlikely to get corrupted.
+However, the WSO2_CARBON_DB will keep to use the H2 database as it consist of metadata specific to the wso2 server, and it's safe to use the H2 database for the WSO2_CARBON_DB as it could recover the data by the server itself in case of the file corruption by simply removing the old file. Also, there won&#39;t be heavy read/write operations for this datasource, hence it's highly unlikely to get corrupted.
 
-Identity servers support most of the RDBMS systems available in the market such as (ORACLE, SQL Server, MySQL, PostgreSQL, DB2) and Standard LDAP systems (openldap, Active directory). For more information refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/working-with-databases/#working-with-databases).
+Identity servers support most of the RDBMS systems available in the market such as (ORACLE, SQL Server, MySQL, PostgresSQL, DB2) and Standard LDAP systems (openldap, Active directory). For more information refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/working-with-databases/#working-with-databases).
 
 **Database Separation**
 
@@ -348,7 +348,7 @@ One another key point of setting up the DB is correct separation of the **databa
 
 Schema of database server
 
-- 2 minimum Schema should be created, i.e shared database &amp; identity database ( if you are not using workflow feature)
+- 2 minimum Schema should be created, i.e. shared database &amp; identity database ( if you are not using workflow feature)
 
 The below scripts have been executed to create each DB:
 
@@ -400,7 +400,7 @@ Refer to the [document](https://is.docs.wso2.com/en/latest/setup/deployment-guid
 
 ## Configuration best practices
 
-Starting for Identity server 5.9.0 , all the XML based configurations are centralized to a single file named **deployment.toml** which resides in the &lt;wso2is&gt;/repository/conf directory. Therefore going forward any custom configuration has to be done in the **deployment.toml** file and all the changes will be reflected in the respective XML files at the runtime of the server.
+Starting for Identity server 5.9.0 , all the XML based configurations are centralized to a single file named **deployment.toml** which resides in the &lt;wso2is&gt;/repository/conf directory. Therefore, going forward any custom configuration has to be done in the **deployment.toml** file and all the changes will be reflected in the respective XML files at the runtime of the server.
 
 ### Server configurations
 
@@ -467,16 +467,16 @@ Below section is used to configure the application password from the authenticat
 [identity.auth_framework.endpoint]
 app_password= "$secret{app_password}"
 ```
-In the below we are configuring the SHA-256 hash of the newly added client app\_password for the above client app on the server side. Here also we have kept the default configurations.
+In the below we are configuring the SHA-256 hash of the newly added client app_password for the above client app on the server side. Here also we have kept the default configurations.
 ```
 [account_recovery.endpoint.auth]
 hash = "66cd9688a2ae068244ea01e70f0e230f5623b7fa4cdecb65070a09ec06452262"
 ```
 ### Keystores
 
-By default WSO2 Identity server comes with Single Keystore and a separate truststore (stored in the &lt;IS\_HOME&gt;/repository/resources/security/ directory). However in a production environment it&#39;s recommended to separate out the keystores for better usage. Refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/configuring-keystores-in-wso2-products/) for more information.
+By default, WSO2 Identity server comes with Single Keystore and a separate truststore (stored in the &lt;IS_HOME&gt;/repository/resources/security/ directory). However, in a production environment it&#39;s recommended to separate out the keystores for better usage. Refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/configuring-keystores-in-wso2-products/) for more information.
 
-**Primary Keystore** - Use the existing Primary Keystore for signing messages when WSO2 Identity Server communicates with external parties (such SAML, OIDC id\_token signing)
+**Primary Keystore** - Use the existing Primary Keystore for signing messages when WSO2 Identity Server communicates with external parties (such SAML, OIDC id_token signing)
 ```
 [keystore.primary]
 file_name = "primary.jks"
@@ -531,10 +531,10 @@ signature = "WSO2 Identity Server"
 
 In the WSo2 identity server 5.11.0 version there are two system applications that are shipped with the out-of-the-box product.
 
-1. My account application - This can be used to manage the user&#39;s profile by the users themself.
+1. My account application - This can be used to manage the user&#39;s profile by the users themselves.
 2. Console application - This is yet a beta release. This can be used to manage the identity server by admin users.
 
-By default there are two service providers created for each of these applications and they are configured as system applications. Once a service provider is configured as a system application it can not be changed unless it was withdrawn from the configuration.
+By default, there are two service providers created for each of these applications, and they are configured as system applications. Once a service provider is configured as a system application it can not be changed unless it was withdrawn from the configuration.
 
 The below configuration is added to set all the applications including the aforementioned ones to read write mode.
 ```
@@ -560,7 +560,7 @@ tenant_deletion=true
 ```
 ### Database
 
-Configuring the correct database pool properties is important for achieving the maximum performance of the Identity server. Therefore certain sets of configurations that are common to all the databases and certain that are specific based on the database type that are being used. Hence please follow the [documentation](https://is.docs.wso2.com/en/latest/setup/performance-tuning-recommendations/#jdbc-pool-configuration) for common configuration.
+Configuring the correct database pool properties is important for achieving the maximum performance of the Identity server. Therefore, certain sets of configurations that are common to all the databases and certain that are specific based on the database type that are being used. Hence, please follow the [documentation](https://is.docs.wso2.com/en/latest/setup/performance-tuning-recommendations/#jdbc-pool-configuration) for common configuration.
 
 **Database specific configuration**
 
@@ -578,13 +578,13 @@ logAbandoned = false
 
 #### PostgreSQL
 
-**Increese**  **max\_wal\_size**
+**Increese**  **max_wal_size**
 
 Postgres checkpoint is set to 5 minutes and if the WAL generated during that time is greater than the default max wal size (1 GB) there will be frequent flush happen to the disk, which will decrease the performance of the database. This has to be verified with your DBA and configure the correct value based on the TPS expected. Further reading refers to the [documentation](https://www.postgresql.org/docs/9.6/wal-configuration.html).
 
 **Commit on Return**
 
-Due to the default behavior of the postgreSQL, all the SELECT queries also have to be committed. Otherwise there will be a low commit ratio and cause certain locks due the postgreSQL holds up that connection until it receives the commit. However in Identity server we do not make commits for SELECT statements, Hence this will lead into an inconsistent state. Therefore to avoid the same postgreSQL configurations should include the property commitOnReturn and set it to true as follows.
+Due to the default behavior of the postgreSQL, all the SELECT queries also have to be committed. Otherwise, there will be a low commit ratio and cause certain locks due the postgreSQL holds up that connection until it receives the commit. However, in Identity server we do not make commits for SELECT statements, Hence this will lead into an inconsistent state. Therefore, to avoid the same postgreSQL configurations should include the property commitOnReturn and set it to true as follows.
 ```
 [database.xxx_db.pool_options]
 defaultAutoCommit= false
@@ -608,7 +608,7 @@ driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 
 By default, the MSSQL Server uses shared locks to prevent other transactions from modifying rows while the current transaction is running a read operation. When this is the case, if multiple read statements are trying to execute for the same table, there might be a deadlock situation.
 
-Therefore, in order to overcome this, we have to change this default behavior from READ\_COMMITTED\_SNAPSHOT being off to READ\_COMMITTED\_SNAPSHOT being on for the databases.
+Therefore, in order to overcome this, we have to change this default behavior from READ_COMMITTED_SNAPSHOT being off to READ_COMMITTED_SNAPSHOT being on for the databases.
 ```
 ALTER DATABASE <DATABASE_NAME> SET ALLOW_SNAPSHOT_ISOLATION ON
 ALTER DATABASE <DATABASE_NAME> SET READ_COMMITTED_SNAPSHOT ON WITH ROLLBACK IMMEDIATE 
@@ -629,7 +629,7 @@ WSO2 supports the following membership schemes for clustering - well-known addre
 
 ### Cleanup Configuration
 
-WSO2 identity server, comes with a pre packaged cleanup module for housekeeping the identity related unused data. This is helpful to maintain the database growth. However as this housekeeping is performed from the JAVA level, there could be a performance issue if you try to use the maximum use out of the identity server. In such heavy use cases it&#39;s recommended to turn off the default housekeeping and enable the cleanup from the stored procedures. Stored procedures are more efficient and those should be scheduled in the database with the help of your DBA, However for general usage this is not required. Please refer to the maintenance section for more details of the stored procedures.
+WSO2 identity server, comes with a pre-packaged cleanup module for housekeeping the identity related unused data. This is helpful to maintain the database growth. However, as this housekeeping is performed from the JAVA level, there could be a performance issue if you try to use the maximum use out of the identity server. In such heavy use cases it&#39;s recommended to turn off the default housekeeping and enable the cleanup from the stored procedures. Stored procedures are more efficient and those should be scheduled in the database with the help of your DBA, However for general usage this is not required. Please refer to the maintenance section for more details of the stored procedures.
 ```
 [session_data.cleanup]
 enable_expired_data_cleanup = false
@@ -644,9 +644,9 @@ enable = false
 
 ### Userstore
 
-In WSO2 Identity server, username is considered as case insensitive, Hence all the username queries fired to the database will have a lower(UM\_USER\_NAME) function, However this is not required for some of the databases like MySQL is treat all the queries as case insensitive.
+In WSO2 Identity server, username is considered as case-insensitive, Hence all the username queries fired to the database will have a lower(UM_USER_NAME) function, However this is not required for some databases like MySQL is treat all the queries as case-insensitive.
 
-Therefore it&#39;s recommended to set the case insensitive parameter to false for databases like MySQL and SQL Server. Otherwise the provided Indexes in the product dbscripts will not affect. Refer section [indexes](#indexes) for creating the correct indexes.
+Therefore it&#39;s recommended to set the case-insensitive parameter to false for databases like MySQL and SQL Server. Otherwise the provided Indexes in the product dbscripts will not affect. Refer section [indexes](#indexes) for creating the correct indexes.
 ```
 [user_store] 
 properties.CaseInsensitiveUsername = false
@@ -680,9 +680,9 @@ WSO2 Identity Server comprises three different registry repositories.
 
 1. **Local Repository:** Store configuration and runtime data that is local to the server.
 
-1. **Configuration Repository:** Store product-specific configurations.
+2. **Configuration Repository:** Store product-specific configurations.
 
-1. **Governance Repository:** Store configuration and data that are shared across the whole platform. This typically includes services, service descriptions, endpoints or data sources.
+3. **Governance Repository:** Store configuration and data that are shared across the whole platform. This typically includes services, service descriptions, endpoints or data sources.
 
 Below configuration is used to point out the database to be used for the registry.
 ```
@@ -727,7 +727,7 @@ This section explains how plain text passwords in configuration files can be enc
 
 #### Encrypting passwords
 
-Open the server configuration file (deployment.toml file) in the &lt;IS\_HOME&gt;/repository/conf/ directory and add the &quot;[secrets]&quot; configuration section at the bottom of the file as shown below. Now we have to provide an alias for the password type followed by the actual password. Below I have listed several of them.
+Open the server configuration file (deployment.toml file) in the &lt;IS_HOME&gt;/repository/conf/ directory and add the &quot;[secrets]&quot; configuration section at the bottom of the file as shown below. Now we have to provide an alias for the password type followed by the actual password. Below I have listed several of them.
 ```
 [secrets]
 admin_password = "[password_1]"
@@ -737,7 +737,7 @@ key_password = "[password_4]"
 truststrore_password = "[password_5]"
 app_password = "[password_6]"
 ```
-Then navigate to the &lt;IS\_HOME&gt;/bin/ directory in a command prompt, and execute the following command to encrypt the passwords.
+Then navigate to the &lt;IS_HOME&gt;/bin/ directory in a command prompt, and execute the following command to encrypt the passwords.
 ```
 On Linux: ./ciphertool.sh -Dconfigure
 On Windows: ciphertool.bat -Dconfigure
@@ -769,17 +769,17 @@ For more information on this please refer to our [official documentation](https:
 
 ## Artifact Synchronization
 
-In a multi node setup of the WSO2 Identity server, we need to synchronize some of the artifacts using a file server in order to replicate the changes made to the one node to the other nodes. Following are the such files that should be shared using the shared file server like NFS or Rsync. These can be ignored if relevant features are not used in the deployment.
+In a multi node setup of the WSO2 Identity server, we need to synchronize some artifacts using a file server in order to replicate the changes made to the one node to the other nodes. Following are the such files that should be shared using the shared file server like NFS or Rsync. These can be ignored if relevant features are not used in the deployment.
 
-- Userstores which is reside in the &lt;wso2is&gt;/repository/deployment/server/userstores/
-- Tenants which is reside in the &lt;wso2is&gt;/repository/deployment/tenants/
+- Userstores which is resided in the &lt;wso2is&gt;/repository/deployment/server/userstores/
+- Tenants which is resided in the &lt;wso2is&gt;/repository/deployment/tenants/
 - Workflow engine related artifacts
   - &lt;wso2is&gt;/repository/deployment/server/humantasks/
   - &lt;wso2is&gt;/repository/deployment/server/bpel/
 
 ## Performance Tuning
 
-Also please refer to the performance tuning recommendations given in the [documentation](https://is.docs.wso2.com/en/latest/setup/performance-tuning-recommendations/). For tuning the host and the wso2 identity server for better performance. Also you can refer to the [benchmarks](https://github.com/wso2/performance-is/tree/master/benchmarks) of the standard identity server deployment we have used.
+Also, please refer to the performance tuning recommendations given in the [documentation](https://is.docs.wso2.com/en/latest/setup/performance-tuning-recommendations/). For tuning the host and the wso2 identity server for better performance. Also, you can refer to the [benchmarks](https://github.com/wso2/performance-is/tree/master/benchmarks) of the standard identity server deployment we have used.
 
 ### OS-level settings
 
@@ -787,7 +787,7 @@ It is recommended to configure the local DNS entries in the identity server inst
 
 #### Setting the thread execution limit for multi tenant mode.
 
-In multi-tenant mode, the Carbon runtime limits the thread execution time. That is, if a thread is stuck or taking a long time to process, Carbon detects such threads, interrupts and stops them. Note that Carbon prints the current stack trace before interrupting the thread. This mechanism is implemented as an Apache Tomcat valve. Therefore, it should be configured in the &lt;IS\_HOME&gt;/repository/conf/deployment.toml file as shown below.
+In multi-tenant mode, the Carbon runtime limits the thread execution time. That is, if a thread is stuck or taking a long time to process, Carbon detects such threads, interrupts and stops them. Note that Carbon prints the current stack trace before interrupting the thread. This mechanism is implemented as an Apache Tomcat valve. Therefore, it should be configured in the &lt;IS_HOME&gt;/repository/conf/deployment.toml file as shown below.
 ```
 [catalina.valves.valve.properties]
 className = "org.wso2.carbon.tomcat.ext.valves.CarbonStuckThreadDetectionValve"
@@ -801,12 +801,9 @@ The threshold gives the minimum duration in seconds after which a thread is cons
 
 JVM heap size (Xmx) depends on your load. Given below are the general settings but if you are in a production environment, this might not be sufficient . In such situations, you can increase the heap size accordingly .
 
-For instance, if you want to increase the JVM heap size to 4GB, open wso2server.bat or wso2server.sh located in &lt;IS\_HOME&gt;/bin/ and do the following changes.
+For instance, if you want to increase the JVM heap size to 4GB, open wso2server.bat or wso2server.sh located in &lt;IS_HOME&gt;/bin/ and do the following changes.
 ```
 JVM_MEM_OPTS="-Xms4096m -Xmx4096m"
-if [ "$java_version" \< "1.8" ]; then
-    JVM_MEM_OPTS="$JVM_MEM_OPTS -XX:MaxPermSize=512m"
-Fi
 ```
 ##
 
@@ -815,7 +812,7 @@ Fi
 
 As security is one of the most important factors, It&#39;s highly recommended to follow the WSO2 identity server security hardening practices for any production deployment. Refer to the [documentation](https://is.docs.wso2.com/en/latest/administer/security-guidelines-for-production-deployment/#security-guidelines-for-production-deployment) for more information.
 
-In addition to the above mentioned, it&#39;s recommended to follow the WSO2 Identity server [deployment guide](https://is.docs.wso2.com/en/latest/setup/installing-the-product/) and the [administrator guide](https://is.docs.wso2.com/en/latest/administer/wso2-administration-guide/) before any deployment.
+In addition to the above-mentioned, it&#39;s recommended to follow the WSO2 Identity server [deployment guide](https://is.docs.wso2.com/en/latest/setup/installing-the-product/) and the [administrator guide](https://is.docs.wso2.com/en/latest/administer/wso2-administration-guide/) before any deployment.
 
 ### Callback URL Regular Expressions
 
@@ -823,15 +820,15 @@ For password recovery, you can define a regular expression to validate the callb
 
 ## Monitoring
 
-System monitoring and the Logs and Alerts are very important for continuous run of the WSO2 server. Hence it&#39;s critical to have a good monitoring solution for your deployment.
+System monitoring and the Logs and Alerts are very important for continuous run of the WSO2 server. Hence, it&#39;s critical to have a good monitoring solution for your deployment.
 
-WSO2 users log4j framework for the loggin and starting from the Identity Server 5.9.0 log levels can be changed at runtime. Also this can integrate with third party tools to get more insights and alerts using tools such as Splunk , Datadog , Prometheus , Azure Monitor, AWS Cloud watch.
+WSO2 users log4j framework for the logging and starting from the Identity Server 5.9.0 log levels can be changed at runtime. Also, this can integrate with third party tools to get more insights and alerts using tools such as Splunk , Datadog , Prometheus , Azure Monitor, AWS Cloud watch.
 
 ## Log Levels
 
-In general we have defined the INFO standard log level of the WSO2 server and customers can increase the log level to DEBUG or TRACE to see the fine level of the logs.
+In general, we have defined the INFO standard log level of the WSO2 server and customers can increase the log level to DEBUG or TRACE to see the fine level of the logs.
 
-However in the production environment, it&#39;s recommended to have INFO as the log level for all the components as increasing the log levels could impact on the WSO2 server performance. For more details please refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/monitoring-the-identity-server/).
+However, in the production environment, it&#39;s recommended to have INFO as the log level for all the components as increasing the log levels could impact on the WSO2 server performance. For more details please refer to the [documentation](https://is.docs.wso2.com/en/latest/setup/monitoring-the-identity-server/).
 
 ###
 
@@ -841,7 +838,7 @@ However in the production environment, it&#39;s recommended to have INFO as the 
 
 ### Enable Logs for a Component
 
-Add a logger in the &lt;IS\_HOME&gt;/repository/conf/log4j2.properties file to define the logger. Then add the to the loggers list by comma-separate.
+Add a logger in the &lt;IS_HOME&gt;/repository/conf/log4j2.properties file to define the logger. Then add the to the loggers list by comma-separate.
 ```
 logger.<Logger_Name>.name = <Component_name>
 logger.<Logger_Name>.level = <Log_level>
@@ -862,7 +859,7 @@ Based on the business requirements it is required to mask sensitive information 
 
 ## Log Retention
 
-In a production system it is recommended to move old logs to a different location to prevent the hard disk from filling. The log retanting policies can be found from the &lt;IS-HOME&gt;/repository/conf/log4j2.properties file. Here you can configure the carbon log file appender to configure the server log file. Below are the recommended configurations that we shipped with the product itself. If you need to configure the log retention according to an organization policy below configs could be used to configure them.
+In a production system it is recommended to move old logs to a different location to prevent the hard disk from filling. The log retaining policies can be found from the &lt;IS-HOME&gt;/repository/conf/log4j2.properties file. Here you can configure the carbon log file appender to configure the server log file. Below are the recommended configurations that we shipped with the product itself. If you need to configure the log retention according to an organization policy below configs could be used to configure them.
 ```
 appender.CARBON_LOGFILE.policies.type = Policies
 appender.CARBON_LOGFILE.policies.time.type = TimeBasedTriggeringPolicy
@@ -939,7 +936,7 @@ WSO2 Identity server required a set of maintenance activities to be performed in
 
 ### Data Cleanup
 
-As it was mentioned above, WSO2 server comes with pre-packed housekeeping activity for general maintenance. However as it could have some performance impact of the heavy usage of the wso2 server, it&#39;s recommended to turn off the pre-packed housekeeping and enable stored procedures to clean up the unused data.
+As it was mentioned above, WSO2 server comes with pre-packed housekeeping activity for general maintenance. However, as it could have some performance impact of the heavy usage of the wso2 server, it&#39;s recommended to turn off the pre-packed housekeeping and enable stored procedures to clean up the unused data.
 
 Cleanup using the stored procedures, Refer all the stored procedures available [here](https://github.com/wso2/carbon-identity-framework/tree/master/features/identity-core/org.wso2.carbon.identity.core.server.feature/resources/dbscripts/stored-procedures). Mainly We have 2 cleanup procedures as follows. These should be compiled and scheduled by the DBA.
 
@@ -957,11 +954,11 @@ Cleanup using the stored procedures, Refer all the stored procedures available [
 
 ### Indexes
 
-Also one of the other important things is the database indexes. WSO2 shipped the most of the required indexes in the default product db scripts. Hence creating the database using the DDL should create the required indexes.
+Also, one of the other important things is the database indexes. WSO2 shipped the most of the required indexes in the default product db scripts. Hence, creating the database using the DDL should create the required indexes.
 
-However there are certain cases where these indexes get updated and should require a change based on the configurations. Hence its DBA responsibility to propagate the same to the database for the optimum performance.
+However, there are certain cases where these indexes get updated and should require a change based on the configurations. Hence, its DBA responsibility to propagate the same to the database for the optimum performance.
 
-1. If the userstore is configured to use case insensitive usernames with the databases like Oracle, PostgreSQL, SQLServer DBA should create the respective indexes with lower(UM\_USER\_NAME) functionality. Refer section [userstore](#_38s8lnf3lt92) for more details.
+1. If the userstore is configured to use case-insensitive usernames with the databases like Oracle, PostgreSQL, SQLServer DBA should create the respective indexes with lower(UM_USER_NAME) functionality. Refer section [userstore](#_38s8lnf3lt92) for more details.
 
 2. New indexes introduced with WUM updates will not reflect in the database, Hence its the maintenance team responsibility to create such indexes in the database with the help of DBA.
 
@@ -979,7 +976,7 @@ It&#39;s very important to renew the certificates before they expire. Usually wh
 
 ## Updates
 
-It is very important to keep updated your product with the latest updates provided by the WSO2, Hence WSO2 will release the security updates, Bug fixes and performance improvements via the Updates. Therefore it&#39;s the responsibility of the maintenance team to define a regular maintenance window and update the product with the latest updates available.
+It is very important to keep updated your product with the latest updates provided by the WSO2, Hence WSO2 will release the security updates, Bug fixes and performance improvements via the Updates. Therefore, it&#39;s the responsibility of the maintenance team to define a regular maintenance window and update the product with the latest updates available.
 
 When performing the update it should follow the basic practices that are used for any software update, As this should be first applied into the lowest environment first and verify all the test cases are passed and then followed by the other environments and finally with the production environment.
 
@@ -1002,7 +999,7 @@ A subscription is mandatory to get WSO2 updates. A Subscription can be obtained 
 
 Update tool is a CLI distribution that is separate for Linux, MacOS and Windows distributions. Bringing the product up to date with the Update Tool is very easy. It is as simple as running one of the commands that matches with your Operating System.
 
-The following commands should be performed in command prompt under the directory path of &lt;IS\_HOME&gt;/bin
+The following commands should be performed in command prompt under the directory path of &lt;IS_HOME&gt;/bin
 
 Update Commands for OS,
 ```
