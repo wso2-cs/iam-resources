@@ -310,10 +310,10 @@ Connection pooling does not apply to LDAPS connections (SSL-enabled LDAP connect
 
 Most of our customers found it is difficult to project the sizing for their database. Here is some formula for the initial calculation. However, please note that this will be a rough value for calculating estimation of the database size, the actual values may differ depending on use cases and the database types used.
 
-Assumption is 1 - 3 KB per a transaction, and if the projected **TPS** is **50** for the deployment. Here is the formula for calculating the rough size of the database required for a DAY use.
+Assumption is 1 - 3 KB per a Logging request, and if the projected **Logins per Second(LPS)** is **50** for the deployment. Here is the formula for calculating the rough size of the database required for a DAY use.
 
 ```
-(TPS * ConvertSecondsToDay * KBPerTransaction) / (ConvertKBtoGB)(50 * 3600 * 24 * 2) / (1024 * 1024)
+(LPS * ConvertSecondsToDay * KBPerTransaction) / (ConvertKBtoGB)(50 * 3600 * 24 * 2) / (1024 * 1024)
 8 GB per Day 
 ```
 
